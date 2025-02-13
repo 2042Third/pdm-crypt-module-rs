@@ -1,0 +1,9 @@
+[package]
+name = "pdm-crypt-module-rs"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+config = "0.15.8"
+cipher = "0.5.0-pre.7"
+hex = "0.4.3"
