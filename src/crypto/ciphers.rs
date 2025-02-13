@@ -161,7 +161,7 @@ impl Crypto {
     c=constant k=key b=blockcount n=nonce
 
     */
-    pub fn set_values(&mut self, nonce: &[u8], key: &[u8]) {
+    pub fn chacha20_set_values(&mut self, nonce: &[u8], key: &[u8]) {
         // Store nonce
         self.nonce = nonce.to_vec();
 
@@ -362,7 +362,7 @@ mod tests {
             0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f
         ];
 
-        crypto.set_values(&nonce, &key);
+        crypto.chacha20_set_values(&nonce, &key);
 
         crypto.chacha20_block(0);
 
@@ -405,7 +405,7 @@ mod tests {
 
         let plain_text = "Ladies and Gentlemen of the class of '99: If I could offer you only one tip for the future, sunscreen would be it.".as_bytes();
 
-        crypto.set_values(&nonce, &key);
+        crypto.chacha20_set_values(&nonce, &key);
 
         let encrypted = crypto.chacha20_encrypt(0,plain_text);
 
@@ -481,7 +481,7 @@ mod tests {
             0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
         ]);
 
-        crypto.set_values(&nonce, &key);
+        crypto.chacha20_set_values(&nonce, &key);
         crypto.add_counter_to_original(0);
 
         assert_eq!(crypto.original_copy_state[0], [
@@ -537,7 +537,7 @@ mod tests {
             key[i*4..(i+1)*4].copy_from_slice(&u32key[i].to_le_bytes());
         }
 
-        crypto.set_values(&nonce, &key);
+        crypto.chacha20_set_values(&nonce, &key);
 
         crypto.add_counter_to_original(0);
         crypto.copy_original_to_current(0);
@@ -615,7 +615,7 @@ mod tests {
             key[i*4..(i+1)*4].copy_from_slice(&u32key[i].to_le_bytes());
         }
 
-        crypto.set_values(&nonce, &key);
+        crypto.chacha20_set_values(&nonce, &key);
 
         crypto.chacha20_block(0);
 

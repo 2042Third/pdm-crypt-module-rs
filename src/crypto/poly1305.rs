@@ -105,7 +105,7 @@ impl Poly1305 {
         self.mul_r_mod_p();
     }
 
-    #[cfg_attr(feature = "clippy", allow(cast_possible_truncation))]
+    // #[cfg_attr(feature = "clippy", allow(cast_possible_truncation))]
     fn mul_r_mod_p(&mut self) {
         // t = r * a; high limbs multiplied by 5 and added to low limbs
         let mut t = [0; 5];
